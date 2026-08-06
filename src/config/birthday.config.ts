@@ -77,9 +77,9 @@ export const birthdayConfig: BirthdayConfig = {
       "Your smile brightens my entire life. Like a pure Lotus blooming in full glory, you bring elegance, warmth, and endless happiness wherever you go.",
       "May this new chapter bring you breathtaking adventures, boundless joy, and all the dreams your heart holds dear."
     ],
-    letterEnvelopeTitle: "For Your Eyes Only Letter for મારી વ્હાલી ટ્રુપ્તિ 🌸",
+    letterEnvelopeTitle: "For Your Eyes Only Letter for મારી વ્હાલી તૃપ્તિ 🌸",
     letterSubject: "Letter for My Bangaram 💙✨",
-    letterText: `જન્મદિવસની ખૂબ ખૂબ શુભેચ્છાઓ, ટ્રુપ્તિ-જી 🌸💫
+    letterText: `જન્મદિવસની ખૂબ ખૂબ શુભેચ્છાઓ, તૃપ્તિ-જી 🌸💫
 
 13મી ઓગસ્ટનો આ ખાસ દિવસ મારા માટે પણ ખૂબ જ ખાસ છે, કારણ કે આ દિવસે એક એવી સુંદર વ્યક્તિનો જન્મ થયો હતો જે મારા જીવનમાં પ્રેમ, ખુશી અને અનેક યાદો લઈને આવી. ❤️
 

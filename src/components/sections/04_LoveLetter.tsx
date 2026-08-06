@@ -61,7 +61,7 @@ export const LoveLetter: React.FC = () => {
         >
           <span>For Your Eyes Only</span>
           <Mail className="w-8 h-8 md:w-10 md:h-10 text-pink-400 fill-pink-500/30 animate-pulse inline-block" />
-          <span>Letter for મારી વ્હાલી ટ્રુપ્તિ 🌸</span>
+          <span>Letter for મારી વ્હાલી તૃપ્તિ 🌸</span>
         </motion.h2>
 
         <p className="text-sm sm:text-base text-pink-200/70 mt-2 font-light">
