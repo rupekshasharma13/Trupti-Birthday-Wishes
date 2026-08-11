@@ -60,7 +60,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
           </motion.div>
         </motion.div>
 
-        {/* Date Tag */}
+        {/* Date & Celebrant Tag */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,14 +73,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
           <span>{birthdayConfig.celebrant.nickname}</span>
         </motion.div>
 
-        {/* Main Title */}
+        {/* Breathtaking 2-Line Hero Main Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-extrabold tracking-tight mb-6 text-gradient-rose-gold text-glow"
+          className="flex flex-col items-center justify-center font-serif font-extrabold tracking-tight mb-6"
         >
-          {birthdayConfig.celebrant.title}
+          <span className="text-3xl sm:text-5xl md:text-6xl text-gradient-rose-gold text-glow uppercase tracking-wider mb-2">
+            HAPPY BIRTHDAY
+          </span>
+          <span className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-amber-300 drop-shadow-[0_0_30px_rgba(245,208,97,0.8)] font-extrabold">
+            TRUPTI JI 🌸
+          </span>
         </motion.h1>
 
         {/* Typewriter Subtitle */}
@@ -88,42 +93,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="h-14 flex items-center justify-center mb-10 px-4"
+          className="min-h-14 flex items-center justify-center mb-10 px-4"
         >
-          <p className="text-lg sm:text-2xl font-light text-pink-100/90 font-serif italic">
+          <p className="text-lg sm:text-2xl font-light text-pink-100/95 font-serif italic max-w-2xl leading-relaxed">
             "{displayText}"
-            <span className="animate-pulse text-amber-400 ml-1">|</span>
+            <span className="animate-pulse text-amber-400 ml-1 font-normal">|</span>
           </p>
         </motion.div>
 
         {/* Primary CTA Button */}
         <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.95 }}
           onClick={onBegin}
-          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full glass-button text-white font-semibold text-lg shadow-2xl overflow-hidden"
+          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-base md:text-lg shadow-[0_0_35px_rgba(236,72,153,0.6)] hover:shadow-[0_0_60px_rgba(245,208,97,0.8)] border border-white/40 transition-all duration-300 cursor-pointer"
         >
-          <span className="relative z-10 flex items-center gap-2">
-            <Heart className="w-5 h-5 text-pink-400 fill-pink-400 group-hover:scale-125 transition-transform" />
-            Begin the Surprise
-          </span>
-          <ChevronDown className="w-5 h-5 text-amber-300 animate-bounce relative z-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-500/40 via-purple-500/40 to-amber-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <Heart className="w-5 h-5 fill-pink-200 text-pink-200 group-hover:scale-125 transition-transform" />
+          <span>Begin Surprise ✨</span>
+          <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
         </motion.button>
       </div>
-
-      {/* Floating Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60 text-xs tracking-widest uppercase text-pink-200"
-      >
-        <span>Scroll to Explore</span>
-        <ChevronDown className="w-4 h-4 text-pink-400" />
-      </motion.div>
     </section>
   );
 };
