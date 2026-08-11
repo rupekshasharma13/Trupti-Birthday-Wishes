@@ -107,48 +107,522 @@ Forever Yours 🌸`,
   },
   memories: [
     {
-      id: "1",
-      url: "/images/photo1.png",
-      caption: "Golden hour glow & endless smiles with Trupti Ji ✨",
-      date: "13th August Celebration",
-      tag: "Lotus Bloom 🌸",
+        "id": "62",
+        "url": "/images/photo62.png",
+        "caption": "Precious Memory #62 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
     },
     {
-      id: "2",
-      url: "/images/photo2.png",
-      caption: "Spontaneous adventures & unforgettable laughs 💖",
-      date: "Precious Moments",
-      tag: "Sweet Vibes",
+        "id": "11",
+        "url": "/images/photo11.png",
+        "caption": "Precious Memory #11 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
     },
     {
-      id: "3",
-      url: "/images/photo3.png",
-      caption: "Celebrating small victories with big hearts 🥂",
-      date: "Special Times",
-      tag: "Joyful Memories",
+        "id": "39",
+        "url": "/images/photo39.png",
+        "caption": "Precious Memory #39 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
     },
     {
-      id: "4",
-      url: "/images/photo4.png",
-      caption: "Serene moments & heartwarming smiles ☕",
-      date: "Cozy Afternoons",
-      tag: "Peace & Love",
+        "id": "57",
+        "url": "/images/photo57.png",
+        "caption": "Precious Memory #57 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
     },
     {
-      id: "5",
-      url: "/images/photo5.png",
-      caption: "Underneath the city lights with my favorite 🌆",
-      date: "Romantic Evening",
-      tag: "City Lights",
+        "id": "48",
+        "url": "/images/photo48.png",
+        "caption": "Precious Memory #48 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
     },
     {
-      id: "6",
-      url: "/images/photo6.png",
-      caption: "Laughter that echoes in my heart forever ✨",
-      date: "Unforgettable",
-      tag: "Pure Happiness",
+        "id": "22",
+        "url": "/images/photo22.png",
+        "caption": "Precious Memory #22 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
     },
-  ],
+    {
+        "id": "49",
+        "url": "/images/photo49.png",
+        "caption": "Precious Memory #49 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "60",
+        "url": "/images/photo60.png",
+        "caption": "Precious Memory #60 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "30",
+        "url": "/images/photo30.png",
+        "caption": "Precious Memory #30 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "67",
+        "url": "/images/photo67.png",
+        "caption": "Precious Memory #67 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "61",
+        "url": "/images/photo61.png",
+        "caption": "Precious Memory #61 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "51",
+        "url": "/images/photo51.png",
+        "caption": "Precious Memory #51 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "58",
+        "url": "/images/photo58.png",
+        "caption": "Precious Memory #58 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "55",
+        "url": "/images/photo55.png",
+        "caption": "Precious Memory #55 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "12",
+        "url": "/images/photo12.png",
+        "caption": "Precious Memory #12 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "10",
+        "url": "/images/photo10.png",
+        "caption": "Precious Memory #10 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "18",
+        "url": "/images/photo18.png",
+        "caption": "Precious Memory #18 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "9",
+        "url": "/images/photo9.png",
+        "caption": "Precious Memory #9 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "avatar",
+        "url": "/images/avatar.png",
+        "caption": "My Dearest Trupti-Ji 🌸",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "38",
+        "url": "/images/photo38.png",
+        "caption": "Precious Memory #38 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "34",
+        "url": "/images/photo34.png",
+        "caption": "Precious Memory #34 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "56",
+        "url": "/images/photo56.png",
+        "caption": "Precious Memory #56 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "31",
+        "url": "/images/photo31.png",
+        "caption": "Precious Memory #31 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "47",
+        "url": "/images/photo47.png",
+        "caption": "Precious Memory #47 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "5",
+        "url": "/images/photo5.png",
+        "caption": "Precious Memory #5 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "7",
+        "url": "/images/photo7.png",
+        "caption": "Precious Memory #7 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "52",
+        "url": "/images/photo52.png",
+        "caption": "Precious Memory #52 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "37",
+        "url": "/images/photo37.png",
+        "caption": "Precious Memory #37 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "21",
+        "url": "/images/photo21.png",
+        "caption": "Precious Memory #21 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "4",
+        "url": "/images/photo4.png",
+        "caption": "Precious Memory #4 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "54",
+        "url": "/images/photo54.png",
+        "caption": "Precious Memory #54 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "44",
+        "url": "/images/photo44.png",
+        "caption": "Precious Memory #44 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "29",
+        "url": "/images/photo29.png",
+        "caption": "Precious Memory #29 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "26",
+        "url": "/images/photo26.png",
+        "caption": "Precious Memory #26 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "65",
+        "url": "/images/photo65.png",
+        "caption": "Precious Memory #65 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "45",
+        "url": "/images/photo45.png",
+        "caption": "Precious Memory #45 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "64",
+        "url": "/images/photo64.png",
+        "caption": "Precious Memory #64 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "16",
+        "url": "/images/photo16.png",
+        "caption": "Precious Memory #16 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "42",
+        "url": "/images/photo42.png",
+        "caption": "Precious Memory #42 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "15",
+        "url": "/images/photo15.png",
+        "caption": "Precious Memory #15 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "71",
+        "url": "/images/photo71.png",
+        "caption": "Precious Memory #71 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "19",
+        "url": "/images/photo19.png",
+        "caption": "Precious Memory #19 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "70",
+        "url": "/images/photo70.png",
+        "caption": "Precious Memory #70 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "27",
+        "url": "/images/photo27.png",
+        "caption": "Precious Memory #27 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "32",
+        "url": "/images/photo32.png",
+        "caption": "Precious Memory #32 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "23",
+        "url": "/images/photo23.png",
+        "caption": "Precious Memory #23 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "53",
+        "url": "/images/photo53.png",
+        "caption": "Precious Memory #53 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "28",
+        "url": "/images/photo28.png",
+        "caption": "Precious Memory #28 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "66",
+        "url": "/images/photo66.png",
+        "caption": "Precious Memory #66 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "1",
+        "url": "/images/photo1.png",
+        "caption": "Precious Memory #1 with Trupti-Ji ✨",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "24",
+        "url": "/images/photo24.png",
+        "caption": "Precious Memory #24 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "35",
+        "url": "/images/photo35.png",
+        "caption": "Precious Memory #35 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "20",
+        "url": "/images/photo20.png",
+        "caption": "Precious Memory #20 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "25",
+        "url": "/images/photo25.png",
+        "caption": "Precious Memory #25 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "13",
+        "url": "/images/photo13.png",
+        "caption": "Precious Memory #13 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "33",
+        "url": "/images/photo33.png",
+        "caption": "Precious Memory #33 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "8",
+        "url": "/images/photo8.png",
+        "caption": "Precious Memory #8 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "43",
+        "url": "/images/photo43.png",
+        "caption": "Precious Memory #43 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    },
+    {
+        "id": "69",
+        "url": "/images/photo69.png",
+        "caption": "Precious Memory #69 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "14",
+        "url": "/images/photo14.png",
+        "caption": "Precious Memory #14 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "17",
+        "url": "/images/photo17.png",
+        "caption": "Precious Memory #17 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "3",
+        "url": "/images/photo3.png",
+        "caption": "Precious Memory #3 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "6",
+        "url": "/images/photo6.png",
+        "caption": "Precious Memory #6 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "2",
+        "url": "/images/photo2.png",
+        "caption": "Precious Memory #2 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "46",
+        "url": "/images/photo46.png",
+        "caption": "Precious Memory #46 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "72",
+        "url": "/images/photo72.png",
+        "caption": "Precious Memory #72 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "59",
+        "url": "/images/photo59.png",
+        "caption": "Precious Memory #59 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "40",
+        "url": "/images/photo40.png",
+        "caption": "Precious Memory #40 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Pure Happiness 💕"
+    },
+    {
+        "id": "68",
+        "url": "/images/photo68.png",
+        "caption": "Precious Memory #68 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "63",
+        "url": "/images/photo63.png",
+        "caption": "Precious Memory #63 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Joyful Moments ✨"
+    },
+    {
+        "id": "50",
+        "url": "/images/photo50.png",
+        "caption": "Precious Memory #50 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
+        "id": "36",
+        "url": "/images/photo36.png",
+        "caption": "Precious Memory #36 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Romantic Sparkle ✨"
+    },
+    {
+        "id": "41",
+        "url": "/images/photo41.png",
+        "caption": "Precious Memory #41 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Precious Memory 🌸"
+    },
+    {
+        "id": "73",
+        "url": "/images/photo73.png",
+        "caption": "Precious Memory #73 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Lotus Bloom 🌸"
+    }
+],
   audio: {
     title: "A Song For U 🎵",
     // User's uploaded MP3 track

@@ -75,11 +75,27 @@ export const AudioPlayer: React.FC = () => {
 
   return (
     <>
-      {/* Universal Multi-Source HTML5 Audio Tag */}
+      {/* Universal Multi-Source HTML5 Audio Tag with Auto-Resume Protection */}
       <audio
         ref={audioRef}
         loop
         preload="auto"
+        onEnded={() => {
+          if (audioRef.current && isPlaying) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play().catch(() => {});
+          }
+        }}
+        onPause={() => {
+          // Auto-resume if audio pauses unexpectedly while playing state is active
+          if (audioRef.current && isPlaying) {
+            setTimeout(() => {
+              if (audioRef.current && isPlaying && audioRef.current.paused) {
+                audioRef.current.play().catch(() => {});
+              }
+            }, 300);
+          }
+        }}
       >
         <source src="/audio/dhun-laagi-pendujattcomse-viksmcob_fejzzK39.mp3" type="audio/mpeg" />
         <source src="/audio/Merged.mp3" type="audio/mpeg" />
