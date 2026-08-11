@@ -232,12 +232,7 @@ Forever Yours 🌸`,
         "date": "13th August Celebration",
         "tag": "Pure Happiness 💕"
     },
-    {
-        "id": "avatar",
-        "url": "/images/avatar.png",
-        "caption": "My Dearest Trupti-Ji 🌸",
-        "tag": "Lotus Bloom 🌸"
-    },
+
     {
         "id": "34",
         "url": "/images/photo34.png",
