@@ -2,11 +2,15 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Heart, Sparkles, RefreshCw, Stamp } from "lucide-react";
+import { Mail, Heart, Sparkles, RefreshCw, Stamp, Camera, ArrowDown } from "lucide-react";
 import { birthdayConfig } from "@/config/birthday.config";
 import { soundFX } from "@/utils/sound";
 
-export const LoveLetter: React.FC = () => {
+interface LoveLetterProps {
+  onLetterReadComplete?: () => void;
+}
+
+export const LoveLetter: React.FC<LoveLetterProps> = ({ onLetterReadComplete }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [isTypingComplete, setIsTypingComplete] = useState(false);
@@ -30,12 +34,15 @@ export const LoveLetter: React.FC = () => {
         index++;
       } else {
         setIsTypingComplete(true);
+        if (onLetterReadComplete) {
+          onLetterReadComplete();
+        }
         clearInterval(interval);
       }
     }, 22);
 
     return () => clearInterval(interval);
-  }, [isOpen]);
+  }, [isOpen, onLetterReadComplete]);
 
   const handleOpenLetter = () => {
     soundFX.playPaperRustle();
@@ -47,6 +54,13 @@ export const LoveLetter: React.FC = () => {
         sectionRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     }, 100);
+  };
+
+  const handleGoToPhotos = () => {
+    const gallerySection = document.getElementById("memories-gallery");
+    if (gallerySection) {
+      gallerySection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -146,20 +160,32 @@ export const LoveLetter: React.FC = () => {
                 )}
               </div>
 
-              {/* Re-read button */}
+              {/* Unlock Photo Collection CTA & Re-read button */}
               {isTypingComplete && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="mt-8 pt-5 border-t border-white/10 flex justify-end"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mt-10 pt-6 border-t border-pink-500/20 flex flex-col sm:flex-row items-center justify-between gap-4"
                 >
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wider text-pink-300 hover:text-white glass-pill hover:bg-pink-500/20 transition-all border border-pink-500/30 cursor-pointer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-pink-300 hover:text-white glass-pill hover:bg-pink-500/20 transition-all border border-pink-500/30 cursor-pointer"
                   >
-                    <RefreshCw className="w-4 h-4" />
+                    <RefreshCw className="w-3.5 h-3.5" />
                     Close & Re-seal Letter
                   </button>
+
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleGoToPhotos}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-xs sm:text-sm shadow-[0_0_30px_rgba(236,72,153,0.5)] border border-white/30 cursor-pointer"
+                  >
+                    <Camera className="w-4 h-4 text-amber-300" />
+                    <span>Explore Photo Collection 🌸</span>
+                    <ArrowDown className="w-4 h-4 text-amber-300 animate-bounce" />
+                  </motion.button>
                 </motion.div>
               )}
             </motion.div>

@@ -14,6 +14,7 @@ import { GrandFinale } from "@/components/sections/08_GrandFinale";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLetterRead, setIsLetterRead] = useState(false);
   
   // Enable Lenis smooth scroll
   useLenis();
@@ -54,10 +55,10 @@ export default function Home() {
           <BirthdayMessage />
 
           {/* Section 3: Tap-to-Open Love Letter */}
-          <LoveLetter />
+          <LoveLetter onLetterReadComplete={() => setIsLetterRead(true)} />
 
-          {/* Section 4: Memories Gallery */}
-          <MemoriesGallery />
+          {/* Section 4: Memories Gallery (Unlocked only after reading love letter) */}
+          <MemoriesGallery isUnlocked={isLetterRead} />
 
           {/* Section 5: Grand Finale Fireworks */}
           <GrandFinale onReplay={handleReplayStory} />
