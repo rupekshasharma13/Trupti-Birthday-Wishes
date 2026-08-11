@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Maximize2, Heart, Lock, Mail, ArrowUp } from "lucide-react";
+import { Camera, Maximize2, Heart, Lock, Mail, ArrowUp, CheckCircle2, ArrowDown } from "lucide-react";
 import { birthdayConfig, MemoryItem } from "@/config/birthday.config";
 import { LightboxModal } from "@/components/ui/LightboxModal";
+import { soundFX } from "@/utils/sound";
 
 // Flower Garlands for All 4 Edges of Every Photo Card
 const flowerGarlands = [
@@ -36,9 +37,13 @@ const flowerGarlands = [
 
 interface MemoriesGalleryProps {
   isUnlocked?: boolean;
+  onConfirmGallery?: () => void;
 }
 
-export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = true }) => {
+export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({
+  isUnlocked = true,
+  onConfirmGallery,
+}) => {
   const [selectedItem, setSelectedItem] = useState<MemoryItem | null>(null);
 
   const memories = birthdayConfig.memories;
@@ -48,6 +53,19 @@ export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = t
     if (letterSection) {
       letterSection.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleConfirmAndMoveToFinale = () => {
+    soundFX.playSparkle();
+    if (onConfirmGallery) {
+      onConfirmGallery();
+    }
+    setTimeout(() => {
+      const finaleSection = document.getElementById("grand-finale");
+      if (finaleSection) {
+        finaleSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 150);
   };
 
   return (
@@ -65,7 +83,7 @@ export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = t
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-xl mx-auto glass-card p-8 sm:p-12 rounded-3xl border-2 border-pink-500/30 shadow-[0_0_50px_rgba(236,72,153,0.2)] text-center flex flex-col items-center relative overflow-hidden"
+          className="max-w-xl mx-auto glass-card p-8 sm:p-12 rounded-3xl border-2 border-pink-500/30 text-center flex flex-col items-center relative overflow-hidden"
         >
           <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-pink-500 to-amber-400 p-0.5 mb-6 shadow-[0_0_25px_rgba(236,72,153,0.5)]">
             <div className="w-full h-full rounded-full bg-[#0B0714] flex items-center justify-center">
@@ -78,7 +96,7 @@ export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = t
           </h3>
 
           <p className="text-sm sm:text-base text-pink-200/90 max-w-md font-light leading-relaxed mb-8">
-            Please open and finish reading Trupti-Ji's special Love Letter above to unlock <span className="font-semibold text-pink-300">“A Collection of You” ❤️</span>
+            Please confirm reading Trupti-Ji's Love Letter above to unlock <span className="font-semibold text-pink-300">“A Collection of You” ❤️</span>
           </p>
 
           <motion.button
@@ -88,7 +106,7 @@ export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = t
             className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-bold text-xs sm:text-sm shadow-[0_0_30px_rgba(236,72,153,0.5)] border border-white/30 cursor-pointer"
           >
             <Mail className="w-4 h-4 text-amber-300" />
-            <span>Open Love Letter ✉️</span>
+            <span>Go to Love Letter ✉️</span>
             <ArrowUp className="w-4 h-4 text-amber-300 animate-bounce" />
           </motion.button>
         </motion.div>
@@ -199,13 +217,13 @@ export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = t
               })}
             </div>
 
-            {/* Romantic Post-Gallery Quote Card */}
+            {/* Romantic Post-Gallery Quote Card + Confirmation Button */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="mt-20 flex justify-center"
+              className="mt-20 flex flex-col items-center gap-10"
             >
               <div className="glass-card max-w-2xl w-full p-8 sm:p-12 rounded-3xl border border-pink-500/40 shadow-[0_0_50px_rgba(236,72,153,0.3)] text-center flex flex-col items-center relative overflow-hidden">
                 <div className="w-12 h-12 rounded-full bg-pink-500/20 border border-pink-400/40 flex items-center justify-center mb-6 shadow-inner">
@@ -220,6 +238,18 @@ export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = t
                   “and I’ve loved every single one.”
                 </p>
               </div>
+
+              {/* Section 4 Confirmation Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleConfirmAndMoveToFinale}
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-xs sm:text-base shadow-[0_0_35px_rgba(236,72,153,0.6)] border border-white/40 cursor-pointer"
+              >
+                <CheckCircle2 className="w-5 h-5 text-amber-300" />
+                <span>I’ve Explored the Photo Collection — Grand Finale 🎉✨</span>
+                <ArrowDown className="w-4 h-4 text-amber-300 animate-bounce" />
+              </motion.button>
             </motion.div>
           </motion.div>
         </AnimatePresence>

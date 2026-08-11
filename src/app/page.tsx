@@ -14,16 +14,24 @@ import { GrandFinale } from "@/components/sections/08_GrandFinale";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isLetterRead, setIsLetterRead] = useState(false);
   
+  // Section Confirmation Unlock States
+  const [step2Unlocked, setStep2Unlocked] = useState(false);
+  const [step3Unlocked, setStep3Unlocked] = useState(false);
+  const [step4Unlocked, setStep4Unlocked] = useState(false);
+  const [step5Unlocked, setStep5Unlocked] = useState(false);
+
   // Enable Lenis smooth scroll
   useLenis();
 
   const handleBeginSurprise = () => {
-    const nextSection = document.getElementById("birthday-message");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    }
+    setStep2Unlocked(true);
+    setTimeout(() => {
+      const wishSection = document.getElementById("birthday-message");
+      if (wishSection) {
+        wishSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
 
   const handleReplayStory = () => {
@@ -51,17 +59,29 @@ export default function Home() {
           {/* Section 1: Hero */}
           <HeroSection onBegin={handleBeginSurprise} />
 
-          {/* Section 2: Birthday Message Card */}
-          <BirthdayMessage />
+          {/* Section 2: Birthday Message Card (Requires Section 1 confirmation) */}
+          <BirthdayMessage
+            isUnlocked={step2Unlocked}
+            onConfirmMessage={() => setStep3Unlocked(true)}
+          />
 
-          {/* Section 3: Tap-to-Open Love Letter */}
-          <LoveLetter onLetterReadComplete={() => setIsLetterRead(true)} />
+          {/* Section 3: Tap-to-Open Love Letter (Requires Section 2 confirmation) */}
+          <LoveLetter
+            isUnlocked={step3Unlocked}
+            onLetterReadComplete={() => setStep4Unlocked(true)}
+          />
 
-          {/* Section 4: Memories Gallery (Unlocked only after reading love letter) */}
-          <MemoriesGallery isUnlocked={isLetterRead} />
+          {/* Section 4: Memories Gallery (Requires Section 3 confirmation) */}
+          <MemoriesGallery
+            isUnlocked={step4Unlocked}
+            onConfirmGallery={() => setStep5Unlocked(true)}
+          />
 
-          {/* Section 5: Grand Finale Fireworks */}
-          <GrandFinale onReplay={handleReplayStory} />
+          {/* Section 5: Grand Finale Fireworks (Requires Section 4 confirmation) */}
+          <GrandFinale
+            isUnlocked={step5Unlocked}
+            onReplay={handleReplayStory}
+          />
         </div>
       )}
     </main>

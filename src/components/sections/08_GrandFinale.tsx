@@ -1,18 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Heart, PartyPopper, RotateCcw } from "lucide-react";
+import { motion } from "framer-motion";
+import { Sparkles, Heart, PartyPopper, RotateCcw, Lock, Camera } from "lucide-react";
 import confetti from "canvas-confetti";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { birthdayConfig } from "@/config/birthday.config";
 import { soundFX } from "@/utils/sound";
 
 interface GrandFinaleProps {
+  isUnlocked?: boolean;
   onReplay: () => void;
 }
 
-export const GrandFinale: React.FC<GrandFinaleProps> = ({ onReplay }) => {
+export const GrandFinale: React.FC<GrandFinaleProps> = ({ isUnlocked = true, onReplay }) => {
   const [hasCelebrated, setHasCelebrated] = useState(false);
 
   const triggerGrandFireworks = () => {
@@ -58,6 +59,13 @@ export const GrandFinale: React.FC<GrandFinaleProps> = ({ onReplay }) => {
     return Math.random() * (max - min) + min;
   }
 
+  const handleGoToGallery = () => {
+    const gallerySection = document.getElementById("memories-gallery");
+    if (gallerySection) {
+      gallerySection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="grand-finale" className="relative py-28 px-4 max-w-5xl mx-auto z-10 text-center">
       {/* Background Aurora Radial */}
@@ -65,84 +73,116 @@ export const GrandFinale: React.FC<GrandFinaleProps> = ({ onReplay }) => {
         <div className="w-[600px] h-[600px] bg-gradient-to-tr from-pink-500/20 via-purple-600/20 to-amber-400/20 rounded-full blur-[140px] animate-pulse" />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 flex flex-col items-center"
-      >
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-pill border border-amber-400/40 text-xs font-bold uppercase tracking-widest text-amber-300 mb-6 shadow-lg">
-          <PartyPopper className="w-4 h-4 text-amber-400" />
-          <span>The Grand Climax</span>
-        </div>
+      {!isUnlocked ? (
+        /* Locked Section Card */
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-xl mx-auto glass-card p-8 sm:p-12 rounded-3xl border-2 border-pink-500/30 text-center flex flex-col items-center relative overflow-hidden"
+        >
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-pink-500 to-amber-400 p-0.5 mb-6 shadow-[0_0_25px_rgba(236,72,153,0.5)]">
+            <div className="w-full h-full rounded-full bg-[#0B0714] flex items-center justify-center">
+              <Lock className="w-8 h-8 text-amber-300" />
+            </div>
+          </div>
 
-        {/* Crisp Header Title with Clear Emojis */}
-        <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-extrabold text-white text-glow mb-6 leading-tight">
-          <span className="text-gradient-rose-gold">HAPPY BIRTHDAY TRUPTI JI!</span>{" "}
-          <span className="inline-block drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]">🌸🎉</span>
-        </h2>
+          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-amber-300 mb-3">
+            Grand Finale Locked 🔒
+          </h3>
 
-        <p className="text-lg sm:text-2xl font-serif text-pink-100/90 max-w-2xl font-light mb-12">
-          {birthdayConfig.messages.finaleSubtitle}
-        </p>
+          <p className="text-sm sm:text-base text-pink-200/90 max-w-md font-light leading-relaxed mb-8">
+            Please confirm exploring the Photo Collection above to unlock the Grand Finale!
+          </p>
 
-        {/* Celebrate Big Trigger Button */}
-        {!hasCelebrated ? (
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={triggerGrandFireworks}
-            className="group relative inline-flex items-center gap-4 px-10 py-5 rounded-full bg-gradient-to-r from-pink-500 via-purple-600 to-amber-400 text-white font-bold text-xl sm:text-2xl shadow-[0_0_50px_rgba(236,72,153,0.6)] hover:shadow-[0_0_80px_rgba(245,208,97,0.8)] border border-white/40 transition-all duration-300 overflow-hidden cursor-pointer"
+          <button
+            onClick={handleGoToGallery}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-pill border border-pink-500/30 text-xs font-bold uppercase tracking-wider text-pink-200"
           >
-            <Sparkles className="w-7 h-7 text-amber-300 animate-spin" style={{ animationDuration: "6s" }} />
-            <span>CELEBRATE NOW!</span>
-            <PartyPopper className="w-7 h-7 text-amber-300 group-hover:rotate-12 transition-transform" />
-          </motion.button>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-2xl"
-          >
-            <GlassCard glowColor="rose" className="p-8 sm:p-12 border-2 border-pink-400/50">
-              <div className="flex items-center justify-center gap-2 mb-6 text-amber-300">
-                {[...Array(5)].map((_, i) => (
-                  <Heart key={i} className="w-6 h-6 fill-pink-500 text-pink-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
-                ))}
-              </div>
+            <Camera className="w-4 h-4" />
+            <span>Go to Photo Collection</span>
+          </button>
+        </motion.div>
+      ) : (
+        /* Unlocked Section Content */
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 flex flex-col items-center"
+        >
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-pill border border-amber-400/40 text-xs font-bold uppercase tracking-widest text-amber-300 mb-6 shadow-lg">
+            <PartyPopper className="w-4 h-4 text-amber-400" />
+            <span>The Grand Climax</span>
+          </div>
 
-              {/* Custom Heartfelt Gujarati Post-Celebration Message */}
-              <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-6 leading-relaxed">
-                મારી ખુશી, મારી તાકાત, મારા જીવનનો સુંદર સહારો અને મારી સૌથી ખાસ વ્યક્તિ બનવા માટે તમારો દિલથી આભાર. ✨
-              </h3>
+          {/* Crisp Header Title with Clear Emojis */}
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-extrabold text-white text-glow mb-6 leading-tight">
+            <span className="text-gradient-rose-gold">HAPPY BIRTHDAY TRUPTI JI!</span>{" "}
+            <span className="inline-block drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]">🌸🎉</span>
+          </h2>
 
-              <p className="text-base sm:text-lg font-serif text-pink-200/90 leading-relaxed mb-8">
-                તમારા જીવનનો દરેક અધ્યાય અનંત સ્મિતો, સુંદર આશ્ચર્યોથી અને એવી જ ખુશીઓથી ભરેલો રહે, જે રીતે તમે મારા જીવનને પ્રેમ અને આનંદથી ભરી દીધું છે. ❤️
-              </p>
+          <p className="text-lg sm:text-2xl font-serif text-pink-100/90 max-w-2xl font-light mb-12">
+            {birthdayConfig.messages.finaleSubtitle}
+          </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <button
-                  onClick={triggerGrandFireworks}
-                  className="px-6 py-3 rounded-full glass-button text-sm font-semibold text-white flex items-center gap-2 cursor-pointer"
-                >
-                  <PartyPopper className="w-4 h-4 text-amber-300" />
-                  More Fireworks!
-                </button>
+          {/* Celebrate Big Trigger Button */}
+          {!hasCelebrated ? (
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={triggerGrandFireworks}
+              className="group relative inline-flex items-center gap-4 px-10 py-5 rounded-full bg-gradient-to-r from-pink-500 via-purple-600 to-amber-400 text-white font-bold text-xl sm:text-2xl shadow-[0_0_50px_rgba(236,72,153,0.6)] hover:shadow-[0_0_80px_rgba(245,208,97,0.8)] border border-white/40 transition-all duration-300 overflow-hidden cursor-pointer"
+            >
+              <Sparkles className="w-7 h-7 text-amber-300 animate-spin" style={{ animationDuration: "6s" }} />
+              <span>CELEBRATE NOW!</span>
+              <PartyPopper className="w-7 h-7 text-amber-300 group-hover:rotate-12 transition-transform" />
+            </motion.button>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="w-full max-w-2xl"
+            >
+              <GlassCard glowColor="rose" className="p-8 sm:p-12 border-2 border-pink-400/50">
+                <div className="flex items-center justify-center gap-2 mb-6 text-amber-300">
+                  {[...Array(5)].map((_, i) => (
+                    <Heart key={i} className="w-6 h-6 fill-pink-500 text-pink-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                  ))}
+                </div>
 
-                <button
-                  onClick={onReplay}
-                  className="px-6 py-3 rounded-full glass-pill border border-white/20 text-sm font-semibold text-pink-200 hover:text-white flex items-center gap-2 transition-colors cursor-pointer"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  Replay Journey
-                </button>
-              </div>
-            </GlassCard>
-          </motion.div>
-        )}
-      </motion.div>
+                {/* Custom Heartfelt Gujarati Post-Celebration Message */}
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-6 leading-relaxed">
+                  મારી ખુશી, મારી તાકાત, મારા જીવનનો સુંદર સહારો અને મારી સૌથી ખાસ વ્યક્તિ બનવા માટે તમારો દિલથી આભાર. ✨
+                </h3>
+
+                <p className="text-base sm:text-lg font-serif text-pink-200/90 leading-relaxed mb-8">
+                  તમારા જીવનનો દરેક અધ્યાય અનંત સ્મિતો, સુંદર આશ્ચર્યોથી અને એવી જ ખુશીઓથી ભરેલો રહે, જે રીતે તમે મારા જીવનને પ્રેમ અને આનંદથી ભરી દીધું છે. ❤️
+                </p>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  <button
+                    onClick={triggerGrandFireworks}
+                    className="px-6 py-3 rounded-full glass-button text-sm font-semibold text-white flex items-center gap-2 cursor-pointer"
+                  >
+                    <PartyPopper className="w-4 h-4 text-amber-300" />
+                    More Fireworks!
+                  </button>
+
+                  <button
+                    onClick={onReplay}
+                    className="px-6 py-3 rounded-full glass-pill border border-white/20 text-sm font-semibold text-pink-200 hover:text-white flex items-center gap-2 transition-colors cursor-pointer"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    Replay Journey
+                  </button>
+                </div>
+              </GlassCard>
+            </motion.div>
+          )}
+        </motion.div>
+      )}
 
       {/* Customized Footer Branding */}
       <div className="mt-20 text-sm sm:text-base text-pink-200/80 font-serif font-medium flex items-center justify-center gap-2">
