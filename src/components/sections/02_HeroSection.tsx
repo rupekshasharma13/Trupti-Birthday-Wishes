@@ -43,6 +43,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
             <img
               src={birthdayConfig.celebrant.avatarUrl}
               alt={birthdayConfig.celebrant.name}
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src.endsWith(".png")) target.src = "/images/avatar.jpg";
+                else if (!target.src.includes("unsplash")) target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800";
+              }}
               className="w-full h-full object-cover rounded-full transition-transform duration-700 group-hover:scale-110"
             />
           </div>

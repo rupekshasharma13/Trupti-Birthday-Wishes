@@ -64,6 +64,12 @@ export const MemoriesGallery: React.FC = () => {
               <img
                 src={item.url}
                 alt={item.caption}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src.endsWith(".png")) {
+                    target.src = target.src.replace(".png", ".jpg");
+                  }
+                }}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
               />
