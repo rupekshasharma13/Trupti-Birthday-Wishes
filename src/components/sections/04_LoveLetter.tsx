@@ -46,18 +46,24 @@ export const LoveLetter: React.FC<LoveLetterProps> = ({ onLetterReadComplete }) 
           <span>A Special Letter</span>
         </motion.div>
 
-        <motion.h2
+        {/* High-Contrast, Bright Title with Crystal-Clear Gujarati Text */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-gradient-rose-gold text-glow flex items-center justify-center flex-wrap gap-2.5"
+          className="flex flex-col items-center justify-center gap-2"
         >
-          <span>For Your Eyes Only</span>
-          <Mail className="w-7 h-7 sm:w-9 sm:h-9 text-pink-400 fill-pink-500/30 animate-pulse inline-block" />
-          <span>Letter for મારી વ્હાલી તૃપ્તિ 🌸</span>
-        </motion.h2>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-gradient-rose-gold text-glow flex items-center justify-center gap-2.5">
+            <span>For Your Eyes Only</span>
+            <Mail className="w-7 h-7 sm:w-9 sm:h-9 text-pink-400 fill-pink-500/30 animate-pulse inline-block" />
+          </h2>
 
-        <p className="text-sm sm:text-base text-pink-200/80 mt-3 font-light">
+          <div className="text-xl sm:text-3xl md:text-4xl font-serif font-bold text-pink-100 tracking-wide drop-shadow-[0_0_20px_rgba(236,72,153,0.9)] mt-1">
+            Letter for <span className="text-amber-300 font-extrabold drop-shadow-[0_0_15px_rgba(245,208,97,0.8)]">મારી વ્હાલી તૃપ્તિ 🌸</span>
+          </div>
+        </motion.div>
+
+        <p className="text-sm sm:text-base text-pink-200/90 mt-4 font-light">
           {!isOpen ? "Tap the wax seal to open your letter" : "Take your time reading your personal message..."}
         </p>
       </div>
