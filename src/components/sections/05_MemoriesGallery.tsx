@@ -123,10 +123,6 @@ export const MemoriesGallery: React.FC<MemoriesGalleryProps> = ({ isUnlocked = t
                 <span>“A Collection of You”</span>
                 <Heart className="w-8 h-8 md:w-10 md:h-10 text-pink-500 fill-pink-500 inline-block drop-shadow-[0_0_15px_rgba(236,72,153,0.8)] animate-pulse" />
               </motion.h2>
-
-              <p className="text-sm sm:text-base text-pink-200/80 max-w-md font-light leading-relaxed">
-                Tap any photo to view in full-screen
-              </p>
             </div>
 
             {/* Masonry Grid with Full Flower Garland Frame Borders */}
