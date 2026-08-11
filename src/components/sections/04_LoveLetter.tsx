@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Heart, Sparkles, RefreshCw, Stamp, CheckCircle2, ArrowDown } from "lucide-react";
 import { birthdayConfig } from "@/config/birthday.config";
@@ -12,34 +12,7 @@ interface LoveLetterProps {
 
 export const LoveLetter: React.FC<LoveLetterProps> = ({ onLetterReadComplete }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [typedText, setTypedText] = useState("");
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
-
-  // Typewriter effect inside the opened letter - NO automatic scrolling or section opening
-  useEffect(() => {
-    if (!isOpen) {
-      setTypedText("");
-      setIsTypingComplete(false);
-      return;
-    }
-
-    const fullText = birthdayConfig.messages.letterText;
-    let index = 0;
-    setTypedText("");
-
-    const interval = setInterval(() => {
-      if (index < fullText.length) {
-        setTypedText(fullText.substring(0, index + 1));
-        index++;
-      } else {
-        setIsTypingComplete(true);
-        clearInterval(interval);
-      }
-    }, 22);
-
-    return () => clearInterval(interval);
-  }, [isOpen]);
 
   const handleOpenLetter = () => {
     soundFX.playPaperRustle();
@@ -89,7 +62,7 @@ export const LoveLetter: React.FC<LoveLetterProps> = ({ onLetterReadComplete }) 
         </p>
       </div>
 
-      {/* Envelope & Letter Container with Stable Min-Height to Prevent Page Shift */}
+      {/* Envelope & Letter Container */}
       <div className="relative w-full flex justify-center items-center min-h-[480px]">
         <AnimatePresence mode="wait">
           {!isOpen ? (
@@ -126,7 +99,7 @@ export const LoveLetter: React.FC<LoveLetterProps> = ({ onLetterReadComplete }) 
               </div>
             </motion.div>
           ) : (
-            /* Opened Letter Container - Zero auto scroll or page jumps */
+            /* Opened Letter Container - Displays Full Letter Immediately */
             <motion.div
               key="opened-letter"
               initial={{ opacity: 0, y: 30, scale: 0.96 }}
@@ -148,42 +121,37 @@ export const LoveLetter: React.FC<LoveLetterProps> = ({ onLetterReadComplete }) 
                 <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-pink-400 animate-pulse" />
               </div>
 
-              {/* Letter Body Text with Large Mobile Font & Line Spacing */}
+              {/* Full Letter Body Text Displayed Instantly */}
               <div className="text-left font-serif text-lg sm:text-xl md:text-2xl text-pink-50 leading-relaxed sm:leading-loose tracking-wide whitespace-pre-wrap selection:bg-pink-500/40 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-                {typedText}
-                {!isTypingComplete && (
-                  <span className="inline-block w-2.5 h-6 bg-pink-400 animate-pulse ml-1 align-middle rounded-sm shadow-[0_0_10px_#ec4899]" />
-                )}
+                {birthdayConfig.messages.letterText}
               </div>
 
-              {/* Explicit Confirmation Button when letter reading is finished */}
-              {isTypingComplete && (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="mt-10 pt-6 border-t border-pink-500/20 flex flex-col sm:flex-row items-center justify-between gap-4"
+              {/* Confirmation Button at Bottom of Full Letter */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="mt-10 pt-6 border-t border-pink-500/20 flex flex-col sm:flex-row items-center justify-between gap-4"
+              >
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-pink-300 hover:text-white glass-pill hover:bg-pink-500/20 transition-all border border-pink-500/30 cursor-pointer"
                 >
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-pink-300 hover:text-white glass-pill hover:bg-pink-500/20 transition-all border border-pink-500/30 cursor-pointer"
-                  >
-                    <RefreshCw className="w-3.5 h-3.5" />
-                    Re-seal Letter
-                  </button>
+                  <RefreshCw className="w-3.5 h-3.5" />
+                  Re-seal Letter
+                </button>
 
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleConfirmReadAndMoveForward}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-xs sm:text-sm shadow-[0_0_35px_rgba(236,72,153,0.6)] border border-white/40 cursor-pointer"
-                  >
-                    <CheckCircle2 className="w-4.5 h-4.5 text-amber-300" />
-                    <span>I’ve Read the Letter — Move Forward 🌸✨</span>
-                    <ArrowDown className="w-4 h-4 text-amber-300 animate-bounce" />
-                  </motion.button>
-                </motion.div>
-              )}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleConfirmReadAndMoveForward}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-xs sm:text-sm shadow-[0_0_35px_rgba(236,72,153,0.6)] border border-white/40 cursor-pointer"
+                >
+                  <CheckCircle2 className="w-4.5 h-4.5 text-amber-300" />
+                  <span>I’ve Read the Letter — Move Forward 🌸✨</span>
+                  <ArrowDown className="w-4 h-4 text-amber-300 animate-bounce" />
+                </motion.button>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
