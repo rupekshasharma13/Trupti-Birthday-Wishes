@@ -16,7 +16,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   
   // Section Confirmation Unlock States
-  const [step2Unlocked, setStep2Unlocked] = useState(false);
   const [step3Unlocked, setStep3Unlocked] = useState(false);
   const [step4Unlocked, setStep4Unlocked] = useState(false);
   const [step5Unlocked, setStep5Unlocked] = useState(false);
@@ -25,13 +24,10 @@ export default function Home() {
   useLenis();
 
   const handleBeginSurprise = () => {
-    setStep2Unlocked(true);
-    setTimeout(() => {
-      const wishSection = document.getElementById("birthday-message");
-      if (wishSection) {
-        wishSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 100);
+    const wishSection = document.getElementById("birthday-message");
+    if (wishSection) {
+      wishSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleReplayStory = () => {
@@ -59,9 +55,8 @@ export default function Home() {
           {/* Section 1: Hero */}
           <HeroSection onBegin={handleBeginSurprise} />
 
-          {/* Section 2: Birthday Message Card (Requires Section 1 confirmation) */}
+          {/* Section 2: Birthday Message Card (Fully visible by default) */}
           <BirthdayMessage
-            isUnlocked={step2Unlocked}
             onConfirmMessage={() => setStep3Unlocked(true)}
           />
 
