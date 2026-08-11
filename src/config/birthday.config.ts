@@ -372,13 +372,6 @@ Forever Yours 🌸`,
         "tag": "Pure Happiness 💕"
     },
     {
-        "id": "42",
-        "url": "/images/photo42.png",
-        "caption": "Precious Memory #42 with Trupti-Ji ✨",
-        "date": "13th August Celebration",
-        "tag": "Romantic Sparkle ✨"
-    },
-    {
         "id": "15",
         "url": "/images/photo15.png",
         "caption": "Precious Memory #15 with Trupti-Ji ✨",
@@ -467,13 +460,6 @@ Forever Yours 🌸`,
         "caption": "Precious Memory #35 with Trupti-Ji ✨",
         "date": "13th August Celebration",
         "tag": "Precious Memory 🌸"
-    },
-    {
-        "id": "20",
-        "url": "/images/photo20.png",
-        "caption": "Precious Memory #20 with Trupti-Ji ✨",
-        "date": "13th August Celebration",
-        "tag": "Sweet Vibes 💖"
     },
     {
         "id": "25",
