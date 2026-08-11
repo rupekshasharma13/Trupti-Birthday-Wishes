@@ -107,6 +107,13 @@ Forever Yours 🌸`,
   },
   memories: [
     {
+        "id": "62",
+        "url": "/images/photo62.png",
+        "caption": "Precious Memory #62 with Trupti-Ji ✨",
+        "date": "13th August Celebration",
+        "tag": "Sweet Vibes 💖"
+    },
+    {
         "id": "4",
         "url": "/images/photo4.png",
         "caption": "Precious Memory #4 with Trupti-Ji ✨",
@@ -224,13 +231,6 @@ Forever Yours 🌸`,
         "caption": "Precious Memory #10 with Trupti-Ji ✨",
         "date": "13th August Celebration",
         "tag": "Pure Happiness 💕"
-    },
-    {
-        "id": "62",
-        "url": "/images/photo62.png",
-        "caption": "Precious Memory #62 with Trupti-Ji ✨",
-        "date": "13th August Celebration",
-        "tag": "Sweet Vibes 💖"
     },
     {
         "id": "avatar",
