@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Sparkles, ChevronDown, Heart, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Heart, Star } from "lucide-react";
 import { birthdayConfig } from "@/config/birthday.config";
 
 interface HeroSectionProps {
@@ -11,8 +11,10 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
   const [displayText, setDisplayText] = useState("");
+  const [countdown, setCountdown] = useState(5);
+  const [countdownDone, setCountdownDone] = useState(false);
 
-  // Typewriter effect logic for single quote
+  // Typewriter effect
   useEffect(() => {
     const currentString = birthdayConfig.messages.heroTyping[0];
     if (displayText.length < currentString.length) {
@@ -22,6 +24,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
       return () => clearTimeout(timer);
     }
   }, [displayText]);
+
+  // Countdown timer — starts after 1.2s (after hero animates in)
+  useEffect(() => {
+    const startDelay = setTimeout(() => {
+      const interval = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            setTimeout(() => setCountdownDone(true), 400);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }, 1200);
+    return () => clearTimeout(startDelay);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 overflow-hidden">
@@ -73,7 +93,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
           <span>{birthdayConfig.celebrant.nickname}</span>
         </motion.div>
 
-        {/* Breathtaking 2-Line Hero Main Title */}
+        {/* Hero Main Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,25 +116,97 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
           className="min-h-14 flex items-center justify-center mb-10 px-4"
         >
           <p className="text-lg sm:text-2xl font-light text-pink-100/95 font-serif italic max-w-2xl leading-relaxed">
-            "{displayText}"
+            &ldquo;{displayText}&rdquo;
             <span className="animate-pulse text-amber-400 ml-1 font-normal">|</span>
           </p>
         </motion.div>
 
-        {/* Primary CTA Button */}
-        <motion.button
+        {/* ── COUNTDOWN or BEGIN BUTTON ── */}
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          whileHover={{ scale: 1.06 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={onBegin}
-          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-base md:text-lg shadow-[0_0_35px_rgba(236,72,153,0.6)] hover:shadow-[0_0_60px_rgba(245,208,97,0.8)] border border-white/40 transition-all duration-300 cursor-pointer"
+          className="flex flex-col items-center gap-5"
         >
-          <Heart className="w-5 h-5 fill-pink-200 text-pink-200 group-hover:scale-125 transition-transform" />
-          <span>Begin Surprise ✨</span>
-          <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-        </motion.button>
+          <AnimatePresence mode="wait">
+            {!countdownDone ? (
+              /* Countdown Boxes */
+              <motion.div
+                key="countdown"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col items-center gap-4"
+              >
+                <p className="text-pink-300/70 text-sm font-semibold tracking-widest uppercase">
+                  Your surprise opens in...
+                </p>
+                <div className="flex gap-4">
+                  {/* Seconds box */}
+                  <motion.div
+                    key={countdown}
+                    initial={{ scale: 1.3, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                    className="flex flex-col items-center"
+                  >
+                    <div
+                      className="w-24 h-24 md:w-28 md:h-28 rounded-2xl flex items-center justify-center border border-pink-500/30"
+                      style={{
+                        background: "rgba(236,72,153,0.08)",
+                        boxShadow: "0 0 30px rgba(236,72,153,0.25), inset 0 0 20px rgba(236,72,153,0.05)",
+                        backdropFilter: "blur(12px)",
+                      }}
+                    >
+                      <span
+                        className="font-serif font-bold text-pink-200"
+                        style={{ fontSize: "3.5rem", lineHeight: 1, textShadow: "0 0 30px rgba(236,72,153,0.9)" }}
+                      >
+                        {String(countdown).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <span className="text-pink-400/50 text-[10px] tracking-widest uppercase mt-2 font-semibold">
+                      Seconds
+                    </span>
+                  </motion.div>
+                </div>
+
+                {/* Pulsing dots */}
+                <div className="flex gap-2 mt-1">
+                  {[0, 1, 2].map((i) => (
+                    <motion.span
+                      key={i}
+                      className="w-2 h-2 rounded-full bg-pink-400"
+                      animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.2, 0.8] }}
+                      transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            ) : (
+              /* Begin Surprise Button */
+              <motion.button
+                key="begin"
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onBegin}
+                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-base md:text-lg shadow-[0_0_40px_rgba(236,72,153,0.7)] hover:shadow-[0_0_70px_rgba(245,208,97,0.9)] border border-white/40 transition-all duration-300 cursor-pointer"
+              >
+                {/* Shimmer overlay */}
+                <span className="absolute inset-0 rounded-full overflow-hidden">
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                </span>
+                <Heart className="w-5 h-5 fill-pink-200 text-pink-200 group-hover:scale-125 transition-transform" />
+                <span>Begin Surprise ✨</span>
+                <Sparkles className="w-5 h-5 text-amber-200 group-hover:rotate-12 transition-transform" />
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
