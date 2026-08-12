@@ -126,84 +126,185 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBegin }) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          className="flex flex-col items-center gap-5"
+          className="flex flex-col items-center gap-6"
         >
           <AnimatePresence mode="wait">
             {!countdownDone ? (
-              /* Countdown Boxes */
               <motion.div
                 key="countdown"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.4 }}
-                className="flex flex-col items-center gap-4"
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col items-center gap-5"
               >
-                <p className="text-pink-300/70 text-sm font-semibold tracking-widest uppercase">
-                  Your surprise opens in...
-                </p>
-                <div className="flex gap-4">
-                  {/* Seconds box */}
-                  <motion.div
-                    key={countdown}
-                    initial={{ scale: 1.3, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                    className="flex flex-col items-center"
+                {/* Label */}
+                <motion.p
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="text-pink-300/80 text-xs sm:text-sm font-bold tracking-[0.25em] uppercase"
+                >
+                  ✨ &nbsp; Your surprise opens in &nbsp; ✨
+                </motion.p>
+
+                {/* Circular SVG Ring Timer */}
+                <div className="relative flex items-center justify-center">
+                  {/* Outer glow rings */}
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute rounded-full border border-pink-500/20"
+                      style={{ inset: `-${(i + 1) * 14}px` }}
+                      animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.08, 0.3] }}
+                      transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4 }}
+                    />
+                  ))}
+
+                  {/* SVG Ring */}
+                  <svg width="160" height="160" viewBox="0 0 160 160" className="absolute -rotate-90">
+                    {/* Track */}
+                    <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(236,72,153,0.12)" strokeWidth="6" />
+                    {/* Progress arc */}
+                    <motion.circle
+                      cx="80" cy="80" r="68"
+                      fill="none"
+                      stroke="url(#ringGrad)"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                      strokeDasharray={`${2 * Math.PI * 68}`}
+                      strokeDashoffset={2 * Math.PI * 68 * (1 - countdown / 5)}
+                      style={{ filter: "drop-shadow(0 0 8px rgba(236,72,153,0.8))" }}
+                      transition={{ duration: 0.8, ease: "linear" }}
+                    />
+                    <defs>
+                      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#EC4899" />
+                        <stop offset="100%" stopColor="#F59E0B" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+
+                  {/* Inner circle with number */}
+                  <div
+                    className="w-36 h-36 rounded-full flex flex-col items-center justify-center relative z-10"
+                    style={{
+                      background: "radial-gradient(circle at center, rgba(236,72,153,0.15), rgba(11,7,20,0.95))",
+                      boxShadow: "0 0 40px rgba(236,72,153,0.3), inset 0 0 30px rgba(236,72,153,0.08)",
+                      border: "1px solid rgba(236,72,153,0.25)",
+                    }}
                   >
-                    <div
-                      className="w-24 h-24 md:w-28 md:h-28 rounded-2xl flex items-center justify-center border border-pink-500/30"
-                      style={{
-                        background: "rgba(236,72,153,0.08)",
-                        boxShadow: "0 0 30px rgba(236,72,153,0.25), inset 0 0 20px rgba(236,72,153,0.05)",
-                        backdropFilter: "blur(12px)",
-                      }}
-                    >
-                      <span
-                        className="font-serif font-bold text-pink-200"
-                        style={{ fontSize: "3.5rem", lineHeight: 1, textShadow: "0 0 30px rgba(236,72,153,0.9)" }}
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={countdown}
+                        initial={{ scale: 1.6, opacity: 0, y: -10 }}
+                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                        exit={{ scale: 0.4, opacity: 0, y: 10 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                        className="font-serif font-extrabold leading-none"
+                        style={{
+                          fontSize: "4rem",
+                          background: "linear-gradient(135deg, #F9A8D4, #F59E0B)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          filter: "drop-shadow(0 0 12px rgba(236,72,153,0.9))",
+                        }}
                       >
                         {String(countdown).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <span className="text-pink-400/50 text-[10px] tracking-widest uppercase mt-2 font-semibold">
-                      Seconds
+                      </motion.span>
+                    </AnimatePresence>
+                    <span className="text-pink-400/40 text-[9px] tracking-[0.2em] uppercase font-bold mt-1">
+                      seconds
                     </span>
-                  </motion.div>
+                  </div>
                 </div>
 
-                {/* Pulsing dots */}
-                <div className="flex gap-2 mt-1">
-                  {[0, 1, 2].map((i) => (
+                {/* Floating emoji particles */}
+                <div className="relative h-6 w-48 flex items-center justify-center">
+                  {["🌸", "✨", "💕", "🪷", "💫"].map((emoji, i) => (
                     <motion.span
                       key={i}
-                      className="w-2 h-2 rounded-full bg-pink-400"
-                      animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.2, 0.8] }}
-                      transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
-                    />
+                      className="absolute text-sm select-none"
+                      style={{ left: `${i * 22}%` }}
+                      animate={{
+                        y: [0, -10, 0],
+                        opacity: [0.4, 1, 0.4],
+                        scale: [0.8, 1.1, 0.8],
+                      }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        delay: i * 0.3,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      {emoji}
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
             ) : (
-              /* Begin Surprise Button */
-              <motion.button
+              /* ── BEGIN SURPRISE BUTTON ── */
+              <motion.div
                 key="begin"
-                initial={{ opacity: 0, scale: 0.7 }}
+                initial={{ opacity: 0, scale: 0.3 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                whileHover={{ scale: 1.06 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={onBegin}
-                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-bold text-base md:text-lg shadow-[0_0_40px_rgba(236,72,153,0.7)] hover:shadow-[0_0_70px_rgba(245,208,97,0.9)] border border-white/40 transition-all duration-300 cursor-pointer"
+                transition={{ type: "spring", stiffness: 220, damping: 15 }}
+                className="flex flex-col items-center gap-4"
               >
-                {/* Shimmer overlay */}
-                <span className="absolute inset-0 rounded-full overflow-hidden">
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                </span>
-                <Heart className="w-5 h-5 fill-pink-200 text-pink-200 group-hover:scale-125 transition-transform" />
-                <span>Begin Surprise ✨</span>
-                <Sparkles className="w-5 h-5 text-amber-200 group-hover:rotate-12 transition-transform" />
-              </motion.button>
+                {/* Burst particles on reveal */}
+                {["🌸","✨","💕","🪷","⭐","💫","🌺","🎉"].map((emoji, i) => (
+                  <motion.span
+                    key={i}
+                    className="absolute text-lg pointer-events-none select-none"
+                    initial={{ opacity: 1, scale: 0, x: 0, y: 0 }}
+                    animate={{
+                      opacity: 0,
+                      scale: [0, 1.5, 0.8],
+                      x: Math.cos((i / 8) * Math.PI * 2) * 80,
+                      y: Math.sin((i / 8) * Math.PI * 2) * 80,
+                    }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: i * 0.05 }}
+                  >
+                    {emoji}
+                  </motion.span>
+                ))}
+
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-amber-300/70 text-xs font-bold tracking-widest uppercase"
+                >
+                  🎉 &nbsp; Ready for you &nbsp; 🎉
+                </motion.p>
+
+                <motion.button
+                  whileHover={{ scale: 1.07 }}
+                  whileTap={{ scale: 0.94 }}
+                  onClick={onBegin}
+                  className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-full text-white font-bold text-base md:text-lg border border-white/30 transition-all duration-300 cursor-pointer overflow-hidden"
+                  style={{
+                    background: "linear-gradient(135deg, #EC4899, #F43F5E, #F59E0B)",
+                    boxShadow: "0 0 50px rgba(236,72,153,0.7), 0 0 100px rgba(236,72,153,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
+                  }}
+                >
+                  {/* Animated shimmer */}
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                  />
+                  {/* Outer pulse ring */}
+                  <motion.span
+                    className="absolute inset-0 rounded-full border-2 border-pink-300/40"
+                    animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0, 0.6] }}
+                    transition={{ duration: 1.8, repeat: Infinity }}
+                  />
+                  <Heart className="w-5 h-5 fill-pink-200 text-pink-200 group-hover:scale-125 transition-transform relative z-10" />
+                  <span className="relative z-10">Begin Surprise ✨</span>
+                  <Sparkles className="w-5 h-5 text-amber-200 group-hover:rotate-180 transition-transform duration-500 relative z-10" />
+                </motion.button>
+              </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
