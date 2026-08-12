@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useLenis } from "@/hooks/useLenis";
 import { ParticleCanvas } from "@/components/ui/ParticleCanvas";
 import { AudioPlayer } from "@/components/ui/AudioPlayer";
@@ -14,7 +14,8 @@ import { GrandFinale } from "@/components/sections/08_GrandFinale";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [hasBegun, setHasBegun] = useState(false);
+
   // Section Confirmation Unlock States
   const [step3Unlocked, setStep3Unlocked] = useState(false);
   const [step4Unlocked, setStep4Unlocked] = useState(false);
@@ -24,10 +25,14 @@ export default function Home() {
   useLenis();
 
   const handleBeginSurprise = () => {
-    const wishSection = document.getElementById("birthday-message");
-    if (wishSection) {
-      wishSection.scrollIntoView({ behavior: "smooth" });
-    }
+    setHasBegun(true);
+    // Scroll to birthday message after sections render
+    setTimeout(() => {
+      const wishSection = document.getElementById("birthday-message");
+      if (wishSection) {
+        wishSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 600);
   };
 
   const handleReplayStory = () => {
@@ -51,32 +56,44 @@ export default function Home() {
 
       {/* Main Interactive Story Sections */}
       {!isLoading && (
-        <div className="relative z-10 space-y-12">
-          {/* Section 1: Hero */}
+        <div className="relative z-10">
+          {/* Section 1: Hero — always visible */}
           <HeroSection onBegin={handleBeginSurprise} />
 
-          {/* Section 2: Birthday Message Card (Fully visible by default) */}
-          <BirthdayMessage
-            onConfirmMessage={() => setStep3Unlocked(true)}
-          />
+          {/* All remaining sections — only revealed after Begin Surprise */}
+          <AnimatePresence>
+            {hasBegun && (
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-12"
+              >
+                {/* Section 2: Birthday Message Card */}
+                <BirthdayMessage
+                  onConfirmMessage={() => setStep3Unlocked(true)}
+                />
 
-          {/* Section 3: Tap-to-Open Love Letter (Requires Section 2 confirmation) */}
-          <LoveLetter
-            isUnlocked={step3Unlocked}
-            onLetterReadComplete={() => setStep4Unlocked(true)}
-          />
+                {/* Section 3: Love Letter (Requires Section 2 confirmation) */}
+                <LoveLetter
+                  isUnlocked={step3Unlocked}
+                  onLetterReadComplete={() => setStep4Unlocked(true)}
+                />
 
-          {/* Section 4: Memories Gallery (Requires Section 3 confirmation) */}
-          <MemoriesGallery
-            isUnlocked={step4Unlocked}
-            onConfirmGallery={() => setStep5Unlocked(true)}
-          />
+                {/* Section 4: Memories Gallery (Requires Section 3 confirmation) */}
+                <MemoriesGallery
+                  isUnlocked={step4Unlocked}
+                  onConfirmGallery={() => setStep5Unlocked(true)}
+                />
 
-          {/* Section 5: Grand Finale Fireworks (Requires Section 4 confirmation) */}
-          <GrandFinale
-            isUnlocked={step5Unlocked}
-            onReplay={handleReplayStory}
-          />
+                {/* Section 5: Grand Finale (Requires Section 4 confirmation) */}
+                <GrandFinale
+                  isUnlocked={step5Unlocked}
+                  onReplay={handleReplayStory}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </main>
